@@ -6,6 +6,7 @@ import (
 	"os"
 	"text/tabwriter"
 
+	"github.com/Cakra17/todolist/utils"
 	"github.com/spf13/cobra"
 )
   
@@ -34,9 +35,14 @@ var list = &cobra.Command{
       lmt = len(datas[0])
     }
     
-    for _, v := range datas {
-      for _, value := range v[:lmt] {
-        fmt.Fprint(w, value, "\t\t")
+    for i, v := range datas {
+      for j, value := range v[:lmt] {
+        if i == 0 || j != 2{
+          fmt.Fprint(w, value, "\t\t")
+        } else if i > 0 && j == 2 {
+          date := utils.GetTime(value) 
+          fmt.Fprint(w, date, "\t\t")
+        }
       }
       fmt.Fprintln(w)
     }
