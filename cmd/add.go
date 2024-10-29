@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Cakra17/todolist/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -58,10 +59,10 @@ var add = &cobra.Command{
       csvWriter.Flush()
     }
 
-    task := os.Args[2:]
+    task := os.Args[2:] 
 
     todo := &Todo {
-      ID:       strconv.Itoa(len(data) + 1),
+      ID:       utils.GenerateId(len(data)),
       Task:     strings.Join(task, " "),
       Created:  time.Now().String(),
       isDone:   strconv.FormatBool(false),
